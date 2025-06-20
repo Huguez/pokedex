@@ -1,25 +1,23 @@
-
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-reanimated';
+import 'react-native-gesture-handler';
+import { WrapSafe } from './components';
+import { StackNavigation } from './navigation';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
 
 function App() {
  
   return (
-    <View style={styles.container}>
-      <Text style={ styles.title }> Hello World!! </Text>
-    </View>
+    <SafeAreaProvider>
+      <StatusBar
+          backgroundColor="#61dafb"
+          barStyle={ 'dark-content' }
+      />
+      <WrapSafe>
+        <StackNavigation />
+      </WrapSafe>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  }
-});
 
 export default App;
