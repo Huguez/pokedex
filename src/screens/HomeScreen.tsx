@@ -1,11 +1,13 @@
 
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import { NavHook } from '../infrastructure'
-import { Text, Button } from 'react-native-paper'
+import { Text } from 'react-native-paper'
 import { useQuery } from '@tanstack/react-query'
 import { getPokemons } from '../actions'
+import { PokeballBg, PokemonCard } from '../components'
+import { Pokemon } from '../domain'
 
 export const HomeScreen = () => {
    const navigation = useNavigation<NavHook>()
@@ -16,26 +18,34 @@ export const HomeScreen = () => {
       staleTime: 1000*60*60 // 1 hour
    })
 
+   const onRenderItem = ( { item }: { item: Pokemon } ) => (
+      <PokemonCard pokemon={ item } />
+   )
+
 
    return (
       <View>
-         <Text variant={'displayMedium'}>HomeScreen</Text>
+         <PokeballBg style={ styles.imgPosition } />
 
-         <View style={{ marginVertical: 15 }}></View>
-         
-         {
-            isLoading && <ActivityIndicator />
-         }
-
-         <Button mode="contained" onPress={()=> navigation.navigate('Pokedex') }>
-            PokedexScreen
-         </Button>
-         
-         <View style={{ marginVertical: 15 }}></View>
-
-         <Button mode="contained" onPress={()=> navigation.navigate('Search') }>
-            SearchScreen
-         </Button>
+         <FlatList
+            data={ pokemons }
+            keyExtractor={ ( pokemon, index ) => `${ pokemon.id.toString() }-${ index }` }
+            numColumns={ 2 }
+            style={{  }}
+            ListHeaderComponent={ () => (
+               <Text variant={ 'displayMedium' }> Pokedex </Text>
+            )}
+            renderItem={ onRenderItem }
+         />
       </View>
    )
 }
+
+
+const styles = StyleSheet.create({
+   imgPosition: {
+      position: 'absolute',
+      top: -100,
+      right: -100,
+   }
+})
