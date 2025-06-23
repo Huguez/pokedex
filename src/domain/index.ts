@@ -1,0 +1,1 @@
+export { type Pokemons, type Pokemon } from "./entities/Pokemon"

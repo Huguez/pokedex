@@ -3,19 +3,23 @@ import 'react-native-gesture-handler';
 import { WrapSafe } from './components';
 import { StackNavigation } from './navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StatusBar } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
+import { QueryClient, QueryClientProvider  } from '@tanstack/react-query';
+
+
+const queryClient = new QueryClient()
 
 function App() {
- 
   return (
-    <PaperProvider>
-      <SafeAreaProvider>
-        <WrapSafe>
-          <StackNavigation />
-        </WrapSafe>
-      </SafeAreaProvider>
-    </PaperProvider>
+    <QueryClientProvider client={ queryClient }>
+      <PaperProvider>
+        <SafeAreaProvider>
+          <WrapSafe>
+            <StackNavigation />
+          </WrapSafe>
+        </SafeAreaProvider>
+      </PaperProvider>
+    </QueryClientProvider>
   );
 }
 
