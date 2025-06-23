@@ -5,6 +5,7 @@ export interface Pokemon {
    types: string[];
    avatar: string;
    sprites: string[];
+   color: string;
 }
 
 export type Pokemons = Pokemon[];

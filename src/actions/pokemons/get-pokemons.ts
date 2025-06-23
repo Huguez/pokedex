@@ -1,4 +1,4 @@
-import { pokeApi } from "../../config/api/pokeApi";
+import { pokeApi } from "../../config";
 import { Pokemon } from "../../domain";
 import { PokeAPIPokemon, PokeMapper, type PokeApiPaginatedResponse } from "../../infrastructure";
 
@@ -15,9 +15,9 @@ export const getPokemons = async ( page: number = 0, limit: number = 20 ): Promi
 
       const APIpokemons = await Promise.all( [ ...pokemonPromises ] )
       
-      const pokemons = APIpokemons.map( ( resp ) => PokeMapper.pokeAPItoEntity( resp.data ) )
+      const pokemonsPromises = APIpokemons.map( ( resp ) => PokeMapper.pokeAPItoEntity( resp.data ) )
 
-      return pokemons;
+      return await Promise.all( pokemonsPromises )
    } catch (error) {
       console.log( error );
       throw new Error("Error in actions getPokemons");

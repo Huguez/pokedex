@@ -1,11 +1,15 @@
+import { getColorFromImage } from "../../config";
 import { type Pokemon } from "../../domain";
 import { type PokeAPIPokemon } from "../interfaces/pokeApi";
 
 export class PokeMapper {
-   static pokeAPItoEntity( data: PokeAPIPokemon ): Pokemon {
+   static async pokeAPItoEntity( data: PokeAPIPokemon ): Promise<Pokemon>  {
 
       const sprites = this.getSprites(data);
       const avatar = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`;
+
+
+      const color = await getColorFromImage( avatar )
 
       // ToDo: delete this and implement appropriate interface
       // @ts-ignore
@@ -15,6 +19,7 @@ export class PokeMapper {
          types: data.types.map( ( pokeType : any) => pokeType.type.name ),
          avatar,
          sprites,
+         color
       }
    }
 
