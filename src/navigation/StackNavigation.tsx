@@ -16,12 +16,10 @@ export const StackNavigation = () => {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home' screenOptions={ settings }>
-        <Stack.Screen  name='Home' component={ HomeScreen } />
-        <Stack.Screen  name="Search"  component={ SearchScreen } />
-        <Stack.Screen  name="Pokedex"  component={ PokemonScreen } />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator initialRouteName='Home' screenOptions={ settings }>
+      <Stack.Screen  name='Home' component={ HomeScreen } />
+      <Stack.Screen  name="Search"  component={ SearchScreen } />
+      <Stack.Screen  name="Pokemon"  component={ PokemonScreen } />
+    </Stack.Navigator>
   )
 }

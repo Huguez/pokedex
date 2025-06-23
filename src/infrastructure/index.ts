@@ -2,6 +2,7 @@ export {
    type RootStackParam,
    type SettingsNavigation,
    type NavHook,
+   type PokemonScreenProps,
 } from "./types/navigation"
 
 export { 

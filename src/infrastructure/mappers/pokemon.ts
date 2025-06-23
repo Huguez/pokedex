@@ -19,7 +19,10 @@ export class PokeMapper {
          types: data.types.map( ( pokeType : any) => pokeType.type.name ),
          avatar,
          sprites,
-         color
+         color,
+         games: data.game_indices.map( ( game: any ) => game.version.name ),
+         stats: data.stats.map( ( stat: any ) => ({ name: stat.stat.name, value: stat.base_stat }) ),
+         moves: data.moves.map( ( move: any ) => ({ name: move.move.name, level: move.version_group_details[0].level_learned_at }) )
       }
    }
 
