@@ -11,7 +11,6 @@ function App() {
   return (
     <PaperProvider>
       <SafeAreaProvider>
-        <StatusBar backgroundColor="#61dafb" barStyle={ 'dark-content' } />
         <WrapSafe>
           <StackNavigation />
         </WrapSafe>
