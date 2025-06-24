@@ -18,5 +18,9 @@ export const lightColors: ThemeColors = {
 };
 
 export const globalStyles = StyleSheet.create({
-
+  fab: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+  }
 })

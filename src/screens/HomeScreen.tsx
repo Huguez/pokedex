@@ -1,16 +1,22 @@
 import React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
-import { Text } from 'react-native-paper'
+import { FAB, Text, useTheme } from 'react-native-paper'
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query'
 import { getPokemons } from '../actions'
 import { PokeballBg, PokemonCard } from '../components'
 import { Pokemon } from '../domain'
+import { globalStyles } from '../config'
+import { HomeScreenProps } from '../infrastructure'
 
-export const HomeScreen = () => {
+
+export const HomeScreen = ( { navigation }: HomeScreenProps ) => {
    const queryClient =  useQueryClient()
 
+   const theme = useTheme()
+
+
    // before: useQuery
-   const { isLoading, data, fetchNextPage } = useInfiniteQuery({ 
+   const { data, fetchNextPage } = useInfiniteQuery({ 
       queryKey: ['pokemons', 'infinite'], 
       initialPageParam: 0,
       queryFn: async ( params ) => {
@@ -47,6 +53,14 @@ export const HomeScreen = () => {
             onEndReached={ () => fetchNextPage() }
             showsVerticalScrollIndicator={ false }
          />
+
+         <FAB 
+            label='Search'
+            style={[ globalStyles.fab, { backgroundColor: theme.colors.primary } ]}
+            mode={ 'elevated' }
+            color={ theme.dark ? 'dark' : 'white' }
+            onPress={ () => { navigation.navigate( 'Search' ) } }
+          />
       </View>
    )
 }

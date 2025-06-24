@@ -3,6 +3,8 @@ export {
    type SettingsNavigation,
    type NavHook,
    type PokemonScreenProps,
+   type HomeScreenProps,
+   type SearchScreenProps
 } from "./types/navigation"
 
 export { 
